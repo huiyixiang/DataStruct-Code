@@ -1,0 +1,115 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+struct LinkNode
+{
+    int data;
+    LinkNode* next;
+    LinkNode(int x=NULL)
+    {
+        data=x;
+        next=NULL;
+    }
+};
+class SeqStack {
+private:
+    LinkNode* top;
+    LinkNode* buttom;
+public:
+    SeqStack()
+    {
+        top=NULL;
+        buttom=NULL;
+    }
+    ~SeqStack()
+    {
+        MakeEmpty();
+    }
+    void Push(int x)
+    {
+        LinkNode* elem=new LinkNode(x);
+        if(top==NULL)
+        {
+            top=elem;
+            buttom=elem;
+        }
+        else
+        {
+            top->next=elem;
+            top=elem;
+        }
+    }
+    bool Pop(int & x)
+    {
+        if(IsEmpty())
+        {
+            cerr<<"stack is empty!"<<endl;
+            return false;
+        }
+        x=top->data;
+        delete top;
+        top=buttom;
+        while(top->next)
+            top=top->next;
+        return true;
+    }
+    bool GetTop(int& x)
+    {
+        if(IsEmpty())
+        {
+            cerr<<"stack is empty!"<<endl;
+            return false;
+        }
+        x=top->data;
+        return true;
+    }
+    bool IsEmpty()
+    {
+            return (top==NULL ? true : false);
+    }
+    bool IsFull()
+    {
+        return false;
+    }
+    int GetSize()
+    {
+        int i=1;
+        for(LinkNode* last=buttom;last->next;last=last->next)
+            i++;
+        return i;
+    }
+    
+    
+    // codes under this line is not complete!!!!
+    
+    
+    void MakeEmpty()
+    {
+        delete [] ptr;
+        top=-1;
+        SeqStack(maxlen);
+    }
+    void PrintStack()
+    {
+        for(int i=0;i<=top;i++)
+        {
+            cout<<ptr[i]<<" ";
+        }
+        cout<<endl;
+    }
+};
+int main(void)
+{
+    SeqStack test(10);
+    int showpop;
+    for(int i=0;i<10;i++)
+    {
+        test.Push(i);
+    }
+    test.Push(10);
+    test.PrintStack();
+    test.Pop(showpop);
+    cout<<showpop<<endl;
+    test.PrintStack();
+    return 0;
+}
