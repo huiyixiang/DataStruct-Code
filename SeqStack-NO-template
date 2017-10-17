@@ -1,0 +1,89 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+class SeqStack {
+private:
+    int *ptr;
+    int top;
+    int maxlen;
+public:
+    SeqStack(int len = 100)
+    {
+        maxlen=len;
+        ptr=new int[maxlen];
+        top=-1;
+    }
+    ~SeqStack()
+    {
+        delete [] ptr;
+        top=-1;
+    }
+    void Push(int x)
+    {
+        if(IsFull())
+            cerr<<"stack is full!"<<endl;
+        else
+            ptr[++top]=x;
+    }
+    bool Pop(int & x)
+    {
+        if(IsEmpty())
+        {
+            cerr<<"stack is empty!"<<endl;
+            return false;
+        }
+        x=ptr[top--];
+        return true;
+    }
+    bool GetTop(int& x)
+    {
+        if(IsEmpty())
+        {
+            cerr<<"stack is empty!"<<endl;
+            return false;
+        }
+        x=ptr[top];
+        return true;
+    }
+    bool IsEmpty()
+    {
+            return (top==-1 ? true : false);
+    }
+    bool IsFull()
+    {
+        return (top==maxlen-1 ? true : false);
+    }
+    int GetSize()
+    {
+        return maxlen;
+    }
+    void MakeEmpty()
+    {
+        delete [] ptr;
+        top=-1;
+        SeqStack(maxlen);
+    }
+    void PrintStack()
+    {
+        for(int i=0;i<=top;i++)
+        {
+            cout<<ptr[i]<<" ";
+        }
+        cout<<endl;
+    }
+};
+int main(void)
+{
+    SeqStack test(10);
+    int showpop;
+    for(int i=0;i<10;i++)
+    {
+        test.Push(i);
+    }
+    test.Push(10);
+    test.PrintStack();
+    test.Pop(showpop);
+    cout<<showpop<<endl;
+    test.PrintStack();
+    return 0;
+}
