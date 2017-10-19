@@ -1,1 +1,1 @@
-# SeqStack-NO-template-
+This is a DataStruct Code repository.
